@@ -1,9 +1,7 @@
 package br.com.fiap3espf.springbootproject.teacher;
 
 import br.com.fiap3espf.springbootproject.endereco.Endereco;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -18,6 +16,7 @@ public class Teacher {
 
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
     String nome;
     String email;
@@ -25,5 +24,14 @@ public class Teacher {
 
     Especialidade especialidade;
     Endereco endereco;
+
+    public Teacher(DadosCadastroInstrutor data) {
+        this.nome = data.nome();
+        this.email = data.email();
+        this.cnh = data.cnh();
+        this.especialidade = data.especialidade();
+        this.endereco = new Endereco(data.endereco());
+    }
+
 
 }
